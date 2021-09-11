@@ -6,9 +6,9 @@ public class CollectionManager {
   albums = new Album[4];
   
   public void run() {
-    String input;
-    Scanner sc = new Scanner(System.in);
-    StringTokenizer = new StringTokenizer(input, ",")
+    public String input;
+    public Scanner sc = new Scanner(System.in);
+    public StringTokenizer = new StringTokenizer(input, ",")
     
     
     while (input != 'Q') {

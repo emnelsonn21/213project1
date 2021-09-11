@@ -1,3 +1,4 @@
+import java.util.Arrays //are we even allowed to use this?
 
 public class Collection {
 	private Album[] albums; //how to initialize it to size 4 if we can't change instance variables?
@@ -28,12 +29,12 @@ public class Collection {
 		
 		int emptySpot = firstEmptySpace();
 		
+		//how to make sure the tokens from run can be used in add???
 		
-		
-		//emptySpot.artist = 
-		//emptySpot.title = 
-		//emptySpot.genre = 
-		//emptySpot.releaseDate =
+		//emptySpot.artist = input.nextToken;
+		//emptySpot.title = input.nextToken;
+		//emptySpot.genre = input.nextToken;
+		//emptySpot.releaseDate = input.nextToken
 		emptySpot.isAvailable = TRUE;
 		
 		numAblums++;

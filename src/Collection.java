@@ -1,4 +1,5 @@
-import java.util.Arrays //are we even allowed to use this?
+import java.util.Arrays 
+//are we even allowed to use this?
 
 public class Collection {
 	private Album[] albums; //how to initialize it to size 4 if we can't change instance variables?

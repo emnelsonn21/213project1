@@ -34,6 +34,13 @@ public class Collection {
 	}
 	public boolean add(Album album) {
 		//use find to check if already in collection
+		
+		if (find(album) == -1) {
+			continue;
+		}else {
+			return false;
+		}
+		
 		//use string tokenizer to assign title, artist, genre, date
 		
 		int emptySpot = firstEmptySpace();

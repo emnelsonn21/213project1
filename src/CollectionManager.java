@@ -3,6 +3,8 @@ import java.util.Scanner;
 public class CollectionManager {
   system.out.println("Collection Manager starts running");
   
+  albums = new Album[4];
+  
   public void run() {
     String input;
     Scanner sc = new Scanner(System.in);
@@ -14,7 +16,8 @@ public class CollectionManager {
       
       while (input.hasMoreElements()) {
         if (input.nextToken == 'A') {
-          //call add method but how? still need to tokenize strings
+          
+          add(new
           
         }
         

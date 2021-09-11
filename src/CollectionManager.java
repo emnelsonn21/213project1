@@ -9,11 +9,13 @@ public class CollectionManager {
     StringTokenizer = new StringTokenizer(input, ",")
     
     
-    while (input = scanner.nextLine() != 'Q') {
+    while (input != 'Q') {
       //read each line and see what to do - [A]dd, [D]elete, [L]end, [R]eturn, [P][PD][PG] display
       
-      while (nextInput.hasMoreElements()) {
+      while (input.hasMoreElements()) {
         if (input.nextToken == 'A') {
+          //call add method but how? still need to tokenize strings
+          
         }
         
         if (input.nextToken =='D') {
@@ -39,6 +41,8 @@ public class CollectionManager {
         }
         
       }
+      
+      input = scanner.nextLine()
       
       
     }

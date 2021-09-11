@@ -1,27 +1,55 @@
 
 public class Collection {
-	private Album[] albums = new Album[4];
+	private Album[] albums; //how to initialize it to size 4 if we can't change instance variables?
 	private int numAlbums;
 	private int find(Album album) {}
 	private void grow() {
 		Album[] grownCollection = new Album[albums.length + 4]
 			
 		for (int i = 0; i < albums.length; i++) {
-			grownCollection[i] = albums[i]
+			grownCollection[i] = albums[i];
+		}
+		
+		for (int i = albums.length; i < grownCollection.length; i++) {
+			grownCollection[i] = NULL;
 		}
 		
 		//trying to call grown collcetion album instead
-		albums = new Album[grownCollection.length]
+		albums = new Album[grownCollection.length];
 			
 		for (int i = 0; i < grownCollection.length; i++) {
-			albums[i] = grownCollection[i]
+			albums[i] = grownCollection[i];
 		}
 				
 	}
-	public boolean add(Album album) {}
+	public boolean add(Album album) {
+		//use find to check if already in collection
+		//use string tokenizer to assign title, artist, genre, date
+		
+		int emptySpot = firstEmptySpace();
+		
+		
+		
+		//emptySpot.artist = 
+		//emptySpot.title = 
+		//emptySpot.genre = 
+		//emptySpot.releaseDate =
+		emptySpot.isAvailable = TRUE;
+		
+		numAblums++;
+	}
 	public boolean lendingOut(Album album) {}
 	public boolean returnAlbum(Album album)
 	public void print() {}
 	public void printByReleaseDate() {}
 	public void printByGenre() {}
+	
+	public int firstEmptySpace(){
+		int i = 0;
+		 while (albums[i] != NULL) {
+			 i++;
+		 }
+		
+		return i;
+	}
 }

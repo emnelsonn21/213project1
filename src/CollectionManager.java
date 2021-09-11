@@ -16,9 +16,7 @@ public class CollectionManager {
       
       while (input.hasMoreElements()) {
         if (input.nextToken == 'A') {
-          
-          add(new
-          
+          albums.add(new Album); //need to make sure add method includes tokenizer and everything
         }
         
         if (input.nextToken =='D') {

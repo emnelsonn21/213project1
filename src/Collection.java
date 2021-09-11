@@ -1,6 +1,6 @@
 
 public class Collection {
-	private Album[] albums;
+	private Album[] albums = new Album[4];
 	private int numAlbums;
 	private int find(Album album) {}
 	private void grow() {

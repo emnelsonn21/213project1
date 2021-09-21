@@ -1,5 +1,6 @@
 
 import java.util.Scanner;
+import java.util.Calendar;
 import java.util.StringTokenizer;
 
 public class CollectionManager {
@@ -25,35 +26,57 @@ public class CollectionManager {
 					
 			while (tokenizer.hasMoreElements()) {
 				String command = tokenizer.nextToken();
-				String title = new String();
-				String artist = new String();
-				Genre genre = new Genre();
-				Date releaseDate = new Date();
-				boolean isAvailable = true;
+				//String title = new String();
+				//String artist = new String();
+				//boolean isAvailable = true;
 				
 				Album testAlbum = new Album();
 				
 				if (tokenizer.hasMoreElements()) {
 					testAlbum.setTitle(tokenizer.nextToken());
 					testAlbum.setArtist(tokenizer.nextToken());
+					Genre gen = Genre.valueOf(tokenizer.nextToken());
+					Date dt = new Date();
+					
+					switch(gen) {
+						case Classical:
+							testAlbum.setGenre(gen);
+						case Country:
+							testAlbum.setGenre(gen);
+						case Jazz:
+							testAlbum.setGenre(gen);
+						case Pop:
+							testAlbum.setGenre(gen);
+						default:
+							testAlbum.setGenre(Genre.valueOf("Unknown"));
+					}
+					
+					if (tokenizer.hasMoreElements()) {
+						String dat = tokenizer.nextToken();
+						dt.getDate(dat);
+					}
+					
+					
+					
 					//testAlbum.setGenre(tokenizer.nextToken()); need to convert from string to genre
 				}
 				
 				boolean wtf;
 				if (command.equals("A")) {
-					//Album newAlbum = new Album();
 				 wtf = collection.add(testAlbum); 
-				 //in the add method make sure it goes to the
-				 //array not the collection itself?
+				 //if false then output invalid command maybe ?
 				}
 				
 				if (command.equals("D")) {
+					wtf = collection.remove(testAlbum);
 				}
 				
 				if (command.equals("L")) {
+					wtf = collection.lendingOut(testAlbum);
 				}
 				
 				if (command.equals("R")) {
+					wtf = collection.returnAlbum(testAlbum);
 				}
 				
 				if (command.equals("P")) {

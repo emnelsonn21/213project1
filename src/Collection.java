@@ -1,4 +1,4 @@
-import java.util.Arrays 
+import java.util.Arrays; 
 //are we even allowed to use this?
 
 public class Collection {
@@ -13,8 +13,17 @@ public class Collection {
 			}
 		}
 	}
+	
+	public Album[] getAlbums() {
+		  return albums;
+	  }
+	  
+	  public void setAlbums(Album[] newAlbum) {
+		  this.albums = newAlbum;
+	  }
+	  
 	private void grow() {
-		Album[] grownCollection = new Album[albums.length + 4]
+		Album[] grownCollection = new Album[albums.length + 4];
 			
 		for (int i = 0; i < albums.length; i++) {
 			grownCollection[i] = albums[i];

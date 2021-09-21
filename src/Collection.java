@@ -30,42 +30,69 @@ public class Collection {
 		}
 		
 		for (int i = albums.length; i < grownCollection.length; i++) {
-			grownCollection[i] = NULL;
+			grownCollection[i] = null;
 		}
 		
-		//trying to call grown collcetion album instead
-		albums = new Album[grownCollection.length];
+		//trying to call grown collection albums instead
+		albums = grownCollection;
+		
+		//albums = new Album[grownCollection.length];
 			
-		for (int i = 0; i < grownCollection.length; i++) {
-			albums[i] = grownCollection[i];
-		}
+		//for (int i = 0; i < grownCollection.length; i++) {
+			//albums[i] = grownCollection[i];
+		//}
 				
 	}
 	public boolean add(Album album) {
 		//use find to check if already in collection
+		//put attributes of album in the array
 		
 		if (find(album) == -1) {
-			continue;
-		}else {
 			return false;
 		}
 		
-		//use string tokenizer to assign title, artist, genre, date
 		
-		int emptySpot = firstEmptySpace();
+		int emptySpot = find(album) + 1;
 		
-		//how to make sure the tokens from run can be used in add???
+		albums[emptySpot].setIsAvailable(true);
+		albums[emptySpot].setTitle(album.getTitle());
+		albums[emptySpot].setArtist(album.getArtist());
+		albums[emptySpot].setGenre(album.getGenre());
 		
-		//emptySpot.artist = input.nextToken;
-		//emptySpot.title = input.nextToken;
-		//emptySpot.genre = input.nextToken;
-		//emptySpot.releaseDate = input.nextToken
-		emptySpot.isAvailable = TRUE;
-		
-		numAblums++;
+		numAlbums++;
+		return true;
 	}
-	public boolean lendingOut(Album album) {}
-	public boolean returnAlbum(Album album)
+	
+	public boolean remove(Album album) {
+		if (find(album) == -1) {
+			return false;
+		}
+		
+		albums[find(album)].setIsAvailable(false);
+		albums[find(album)].setTitle(null);
+		albums[find(album)].setArtist(null);
+		albums[find(album)].setGenre(null);
+		albums[find(album)] = null;
+		numAlbums--;
+		return true;
+	}
+	
+	public boolean lendingOut(Album album) {
+		if (find(album) == -1) {
+			return false;
+		}
+		
+		albums[find(album)].setIsAvailable(false);
+		return true;
+	}
+	public boolean returnAlbum(Album album) {
+		if (find(album) == -1) {
+			return false;
+		}
+		
+		albums[find(album)].setIsAvailable(true);
+		return true;
+	}
 	public void print() {}
 	public void printByReleaseDate() {}
 	public void printByGenre() {}

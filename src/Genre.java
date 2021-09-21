@@ -1,4 +1,4 @@
 
-public class Genre {
-
+public enum Genre {
+	Classical, Country, Jazz, Pop, Unknown
 }

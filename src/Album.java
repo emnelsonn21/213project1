@@ -9,8 +9,12 @@ public class Album {
 	  
 	  @Override
 	  public boolean equals(Object obj) {
-		return false; 
+		if (obj instanceof Album) {
+			Album album = (Album) obj;
+			return album.title.equals(this.title) && album.artist.equals(this.artist);
 		}
+		return false;
+	  }
 	  
 	  @Override
 	  public String toString() { 

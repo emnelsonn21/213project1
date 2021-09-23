@@ -9,9 +9,10 @@ public class Collection {
 			if (album.equals(albums[i])) {
 				return i;
 			} else {
-				return -1;
+				continue;
 			}
 		}
+		return -1;
 	}
 	
 	public Album[] getAlbums() {

@@ -93,8 +93,46 @@ public class Collection {
 		albums[find(album)].setIsAvailable(true);
 		return true;
 	}
-	public void print() {}
-	public void printByReleaseDate() {}
+	
+	public void print() {
+		String placeHolder = "";
+		for(int i = 0; i < albums.length; i++) {
+			placeHolder = albums[i].toString();
+			System.out.println(placeHolder);
+		}
+	}
+	
+	public void printByReleaseDate() {
+		Album[] sortedCollection = new Album[albums.length];
+		//sortedCollection will be a copy of the albums array that we will modify so to not change the original
+		for(int i = 0; i < albums.length; i++) {
+			sortedCollection[i] = albums[i];
+		}
+		
+		int olderDate = 0;
+		//sorting array
+		for(int i = 0; i < sortedCollection.length; i++) {
+			olderDate = i;
+			for(int j = i + 1; j < sortedCollection.length; j++) {
+				if(sortedCollection[olderDate].getReleaseDate().compareTo(sortedCollection[j].getReleaseDate()) == 1) {
+					olderDate = j;
+				}
+			}
+			if(olderDate != i) {
+				Album holder = new Album();
+				holder = sortedCollection[i];
+				sortedCollection[i] = sortedCollection[olderDate];
+				sortedCollection[olderDate] = holder;
+			}
+		}
+		
+		String placeHolder = "";
+		for(int i = 0; i < sortedCollection.length; i++) {
+			placeHolder = sortedCollection[i].toString();
+			System.out.println(placeHolder);
+		}
+	}
+	
 	public void printByGenre() {}
 	
 	public int firstEmptySpace(){

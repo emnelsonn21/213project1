@@ -26,17 +26,17 @@ public class CollectionManager {
 					
 			while (tokenizer.hasMoreElements()) {
 				String command = tokenizer.nextToken();
-				//String title = new String();
-				//String artist = new String();
-				//boolean isAvailable = true;
 				
 				Album testAlbum = new Album();
 				
 				if (tokenizer.hasMoreElements()) {
 					testAlbum.setTitle(tokenizer.nextToken());
 					testAlbum.setArtist(tokenizer.nextToken());
+				}
+				
+				if(tokenizer.hasMoreElements()) {
 					Genre gen = Genre.valueOf(tokenizer.nextToken());
-					Date dt = new Date();
+					//Date dt = new Date();
 					
 					switch(gen) {
 						case Classical:
@@ -52,9 +52,13 @@ public class CollectionManager {
 					}
 					
 					if (tokenizer.hasMoreElements()) {
-						String dat = tokenizer.nextToken();
-						dt.getDate(dat);
+						String stringDate = tokenizer.nextToken();
+						
+						Date date1 = new Date(stringDate);
+						testAlbum.setDate(date1);
+						
 					}
+					
 					
 					
 					
@@ -62,6 +66,7 @@ public class CollectionManager {
 				}
 				
 				boolean wtf;
+				if (date1.isValid()) {}
 				if (command.equals("A")) {
 				 wtf = collection.add(testAlbum); 
 				 //if false then output invalid command maybe ?

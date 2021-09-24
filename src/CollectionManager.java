@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 import java.util.Calendar;
 import java.util.StringTokenizer;
@@ -6,9 +5,6 @@ import java.util.StringTokenizer;
 public class CollectionManager {
 	
   
-	//public Album[] albums = new Album[4];
-	
- 
 	public void run() {
 		Collection collection = new Collection();
 		Album[] ugh = new Album[4]; //need to rename
@@ -16,14 +12,20 @@ public class CollectionManager {
 	  
 		System.out.println("Collection Manager starts running");
 		Scanner sc = new Scanner(System.in);
-		String input = sc.nextLine();
-		StringTokenizer tokenizer = new StringTokenizer(input, ",");
+		//String input = sc.nextLine();
+		//StringTokenizer tokenizer = new StringTokenizer(input, ",");
 		
 		
 		while (sc.hasNextLine()) {
 			//read each line and see what to do - [A]dd, [D]elete, [L]end, [R]eturn, [P][PD][PG] display
 			
-					
+			String input = sc.next();
+			
+			if (input.equals("Q")) {
+				break;
+			}
+			StringTokenizer tokenizer = new StringTokenizer(input, ",");
+			
 			while (tokenizer.hasMoreElements()) {
 				String command = tokenizer.nextToken();
 				
@@ -36,7 +38,6 @@ public class CollectionManager {
 				
 				if(tokenizer.hasMoreElements()) {
 					Genre gen = Genre.valueOf(tokenizer.nextToken());
-					//Date dt = new Date();
 					
 					switch(gen) {
 						case Classical:
@@ -54,19 +55,16 @@ public class CollectionManager {
 					if (tokenizer.hasMoreElements()) {
 						String stringDate = tokenizer.nextToken();
 						
-						Date date1 = new Date(stringDate);
-						testAlbum.setDate(date1);
+						Date date = new Date(stringDate);
+						testAlbum.setDate(date);
 						
 					}
 					
 					
-					
-					
-					//testAlbum.setGenre(tokenizer.nextToken()); need to convert from string to genre
 				}
 				
 				boolean wtf;
-				if (date1.isValid()) {}
+		
 				if (command.equals("A")) {
 				 wtf = collection.add(testAlbum); 
 				 //if false then output invalid command maybe ?
@@ -100,6 +98,6 @@ public class CollectionManager {
 		}
 		
 		sc.close();
-		System.out.println("Collection Manager storps running");
+		System.out.println("Collection Manager stops running");
 	}
 }

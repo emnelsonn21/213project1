@@ -136,12 +136,4 @@ public class Collection {
 	
 	public void printByGenre() {}
 	
-	public int firstEmptySpace(){
-		int i = 0;
-		 while (albums[i] != NULL) {
-			 i++;
-		 }
-		
-		return i;
-	}
 }

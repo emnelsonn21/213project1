@@ -17,9 +17,10 @@ public class Album {
 	  }
 	  
 	  @Override
-	  public String toString() { 
-		  return "yoyo";
+	public String toString() { 
+		  return title + "::" + artist + "::" + genre + "::" + releaseDate + "::" + isAvailable ;
 	  }
+	  
 	  
 	  
 	  public String getTitle() {

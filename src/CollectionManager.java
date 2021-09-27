@@ -15,8 +15,7 @@ public class CollectionManager {
 	  
 		System.out.println("Collection Manager starts running");
 		Scanner sc = new Scanner(System.in);
-		//String input = sc.nextLine();
-		//StringTokenizer tokenizer = new StringTokenizer(input, ",");
+		sc.useDelimiter("\n");
 		
 		
 		while (sc.hasNextLine()) {
@@ -27,16 +26,19 @@ public class CollectionManager {
 			if (input.equals("Q")) {
 				break;
 			}
+			
+			input.replace(" ", "");
+			
 			StringTokenizer tokenizer = new StringTokenizer(input, ",");
 			
 			while (tokenizer.hasMoreElements()) {
 				String command = tokenizer.nextToken();
 				
-				Album testAlbum = new Album();
+				Album newAlbum = new Album();
 				
 				if (tokenizer.hasMoreElements()) {
-					testAlbum.setTitle(tokenizer.nextToken());
-					testAlbum.setArtist(tokenizer.nextToken());
+					newAlbum.setTitle(tokenizer.nextToken());
+					newAlbum.setArtist(tokenizer.nextToken());
 				}
 				
 				if(tokenizer.hasMoreElements()) {
@@ -44,22 +46,22 @@ public class CollectionManager {
 					
 					switch(gen) {
 						case Classical:
-							testAlbum.setGenre(gen);
+							newAlbum.setGenre(gen);
 						case Country:
-							testAlbum.setGenre(gen);
+							newAlbum.setGenre(gen);
 						case Jazz:
-							testAlbum.setGenre(gen);
+							newAlbum.setGenre(gen);
 						case Pop:
-							testAlbum.setGenre(gen);
+							newAlbum.setGenre(gen);
 						default:
-							testAlbum.setGenre(Genre.valueOf("Unknown"));
+							newAlbum.setGenre(Genre.valueOf("Unknown"));
 					}
 					
 					if (tokenizer.hasMoreElements()) {
 						String stringDate = tokenizer.nextToken();
 						
 						Date date = new Date(stringDate);
-						testAlbum.setDate(date);
+						newAlbum.setDate(date);
 						
 					}
 					
@@ -69,23 +71,24 @@ public class CollectionManager {
 				boolean wtf;
 		
 				if (command.equals("A")) {
-				 wtf = collection.add(testAlbum); 
+				 wtf = collection.add(newAlbum); 
 				 //if false then output invalid command maybe ?
 				}
 				
 				if (command.equals("D")) {
-					wtf = collection.remove(testAlbum);
+					wtf = collection.remove(newAlbum);
 				}
 				
 				if (command.equals("L")) {
-					wtf = collection.lendingOut(testAlbum);
+					wtf = collection.lendingOut(newAlbum);
 				}
 				
 				if (command.equals("R")) {
-					wtf = collection.returnAlbum(testAlbum);
+					wtf = collection.returnAlbum(newAlbum);
 				}
 				
 				if (command.equals("P")) {
+					collection.print();
 				}
 				
 				if (command.equals("PD")) {

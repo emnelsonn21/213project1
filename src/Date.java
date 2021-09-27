@@ -20,7 +20,7 @@ public class Date implements Comparable<Date> {
 			try {
 				month = Integer.valueOf(tokenizer.nextToken());
 				day = Integer.valueOf(tokenizer.nextToken());
-				year = Integer.valueOf(tokenizer.nextToken());
+				year = Integer.valueOf(tokenizer.nextToken().trim());
 			}
 			catch (NumberFormatException nfe) {
 				throw new IllegalArgumentException("invalid date");

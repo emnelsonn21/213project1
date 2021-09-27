@@ -4,7 +4,10 @@ import java.util.StringTokenizer;
 
 public class CollectionManager {
 	
-  
+  	/**
+	Reads the command lines from the console
+	@author Emily Nelson
+	*/
 	public void run() {
 		Collection collection = new Collection();
 		Album[] ugh = new Album[4]; //need to rename

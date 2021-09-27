@@ -158,7 +158,36 @@ public class Collection {
 	Displays the list of albums in the albums array by release date
 	@author Cristofer Gomez-Martinez
 	*/
-	public void printByReleaseDate() {}
+	public void printByReleaseDate() {
+		Album[] sortedCollection = new Album[albums.length];
+		//sortedCollection will be a copy of the albums array that we will modify so to not change the original
+		for(int i = 0; i < albums.length; i++) {
+			sortedCollection[i] = albums[i];
+		}
+
+		int olderDate = 0;
+		//sorting array
+		for(int i = 0; i < numAlbums; i++) {
+			olderDate = i;
+			for(int j = i + 1; j < numAlbums; j++) {
+				if(sortedCollection[olderDate].getReleaseDate().compareTo(sortedCollection[j].getReleaseDate()) == 1) {
+					olderDate = j;
+				}
+			}
+			if(olderDate != i) {
+				Album holder = new Album();
+				holder = sortedCollection[i];
+				sortedCollection[i] = sortedCollection[olderDate];
+				sortedCollection[olderDate] = holder;
+			}
+		}
+
+		String placeHolder = "";
+		for(int i = 0; i < numAlbums; i++) {
+			placeHolder = sortedCollection[i].toString();
+			System.out.println(placeHolder);
+		}
+	}
 	
 	/**
 	Displays the list of albums in the albums array by genre

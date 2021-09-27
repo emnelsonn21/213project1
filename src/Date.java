@@ -8,6 +8,12 @@ public class Date implements Comparable<Date> {
 	
 	//this is a constructor. it doesn't return a value. it makes a Date object when 
 	//you give it a string that's valid
+	/**
+	Takes "mm/dd/yyyy" and creates a Date object out of it
+	Does nothing if the date is invalid
+	@param date the date that is being made a Date object
+	@author Emily Nelson
+	*/
 	public Date(String date) {
 		StringTokenizer tokenizer = new StringTokenizer(date, "/");
 		if (tokenizer.hasMoreElements()) {
@@ -26,6 +32,11 @@ public class Date implements Comparable<Date> {
 			calendar.set(Calendar.DATE, day);
 	    }
 	}
+	
+	/** 
+	Creates a Date object with today's date
+	@author Emily Nelson
+	*/
 	public Date() {
 		Calendar today = Calendar.getInstance();
 	}
@@ -48,6 +59,13 @@ public class Date implements Comparable<Date> {
 	public static final int JUNE = 6;
 	public static final int SEPT = 9;
 	public static final int NOV = 11;
+	
+	/**
+	Checks if the date is valid 
+	Does nothing if date is not valid
+	@return true if date is valid, false otherwise
+	@author Emily Nelson
+	*/
 	public boolean isValid() {
 		
 		
@@ -94,6 +112,13 @@ public class Date implements Comparable<Date> {
 		return true;
 	}
 	
+	/**
+	Compares two dates with one another
+	Gives an int value back
+	@param date the date being compared to "this" date
+	@return 1 if date is older, -1 if "this" is older, 0 if both dates are equal
+	@author Emily Nelson
+	*/
 	@Override
 	public int compareTo(Date date) {
 		int yeardiff = this.year - date.year;

@@ -18,7 +18,15 @@ public class Album {
 	  
 	  @Override
 	public String toString() { 
-		  return title + "::" + artist + "::" + genre + "::" + releaseDate + "::" + isAvailable ;
+		  String date = releaseDate.printAsString(releaseDate);
+		  String availability;
+		  if (isAvailable == true ) {
+			  availability = "is Available";
+		  }
+		  else {
+			  availability = "is not available";
+		  }
+		  return title + "::" + artist + "::" + genre + "::" + date + "::" + availability ;
 	  }
 	  
 	  

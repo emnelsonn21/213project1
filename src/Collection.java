@@ -159,8 +159,8 @@ public class Collection {
 	@author Cristofer Gomez-Martinez
 	*/
 	public void printByReleaseDate() {
+		//sortedCollection will be a copy of the albums array to modify
 		Album[] sortedCollection = new Album[albums.length];
-		//sortedCollection will be a copy of the albums array that we will modify so to not change the original
 		for(int i = 0; i < albums.length; i++) {
 			sortedCollection[i] = albums[i];
 		}
@@ -191,9 +191,39 @@ public class Collection {
 	
 	/**
 	Displays the list of albums in the albums array by genre
-	@author Emily Nelson
+	@author Cristofer Gomez-Martinez
 	*/
-	public void printByGenre() {}
+	public void printByGenre() {
+		//sortedCollection will be a copy of the albums array to modify
+		Album[] sortedCollection = new Album[albums.length];
+		for(int i = 0; i < albums.length; i++) {
+			sortedCollection[i] = albums[i];
+		}
+		
+		int firstGenre = 0; // keeps track of index of genre that comes first
+		
+		//sorting array
+		for(int i = 0; i < numAlbums; i++) {
+			firstGenre = i;
+			for(int j = i + 1; j < numAlbums; j++) {
+				if(sortedCollection[firstGenre].getGenre().compareTo(sortedCollection[j].getGenre()) > 0) {
+				firstGenre = j;
+				}
+			}
+			if(firstGenre != i) {
+				Album holder = new Album();
+				holder = sortedCollection[i];
+				sortedCollection[i] = sortedCollection[firstGenre];
+				sortedCollection[firstGenre] = holder;
+			}
+		}
+				
+		String placeHolder = "";
+		for(int i = 0; i < numAlbums; i++) {
+			placeHolder = sortedCollection[i].toString();
+			System.out.println(placeHolder);
+		}
+	}
 	
 	/**
 	Finds the first empty index/spot in the albums array

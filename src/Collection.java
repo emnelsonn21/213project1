@@ -1,3 +1,7 @@
+/**
+ This class defines a Collection and contains all methods to edit a given collection
+ @author Emily Nelson, Cristofer Gomez-Martinez
+ */
 public class Collection {
 	private Album[] albums; 
 	private int numAlbums;
@@ -26,7 +30,7 @@ public class Collection {
 		  return albums;
 	  }
 	  
-	  /**
+	/**
 	  Sets the albums array to a new albums array
 	  @param newAlbum the new albums array to set
 	  @author Emily Nelson
@@ -34,12 +38,12 @@ public class Collection {
 	  public void setAlbums(Album[] newAlbum) {
 		  this.albums = newAlbum;
 	  }
-	  
-	/**
-	Increases the capacity of the albums array by 4
-	Grown whenever array is full
-	@author Emily Nelson
-	*/
+	
+	  /**
+		Increases the capacity of the albums array by 4
+		Grown whenever array is full
+		@author Emily Nelson
+		*/
 	private void grow() {
 		Album[] grownCollection = new Album[albums.length + 4];
 			
@@ -51,14 +55,8 @@ public class Collection {
 			grownCollection[i] = null;
 		}
 		
-		//trying to call grown collection albums instead
 		albums = grownCollection;
 		
-		//albums = new Album[grownCollection.length];
-			
-		//for (int i = 0; i < grownCollection.length; i++) {
-			//albums[i] = grownCollection[i];
-		//}
 				
 	}
 	
@@ -71,12 +69,16 @@ public class Collection {
 	@author Cristofer Gomez-Martinez, Emily Nelson
 	*/
 	public boolean add(Album album) {
-		//use find to check if already in collection
-		//put attributes of album in the array
 		
 		if (find(album) != -1) {
+			album.setIsAvailable(true);
 			return false;
 		}
+		
+		if ((numAlbums != 0) && (numAlbums % 4 == 0)) {
+			grow();
+		}
+		
 		
 		int index = findEmptySpot(albums);
 		
@@ -102,8 +104,24 @@ public class Collection {
 			return false;
 		}
 		
-		albums[find(album)] = null;
+		int index = find(album);
+		albums[index] = null;
 		numAlbums--;
+		
+		//if the album that got deleted isn't the very last album in the current array, move the last entry to there
+		//this way there are no empty spots in albums
+		if (index < albums.length - 1) {
+			
+			int lastEntry = albums.length;
+			
+			while (albums[lastEntry] == null) {
+				lastEntry--;
+			}
+			
+			albums[index] = albums[lastEntry];
+			albums[lastEntry] = null;
+		}
+		
 		return true;
 	}
 	
@@ -146,12 +164,18 @@ public class Collection {
 	@author Cristofer Gomez-Martinez
 	*/
 	public void print() {
-		String placeHolder = "";
+		System.out.println("*List of albums in the collection");
+		if (albums[0] == null) {
+			System.out.println("The collection is empty!");
+			return;
+		}
+
 		for(int i = 0; i < numAlbums; i++) {
 			System.out.println("length of albums is " + albums.length);
-			placeHolder = albums[i].toString();
-			System.out.println(placeHolder);
+			System.out.println(albums[i].toString());
 		}
+		
+		System.out.println("*End of list");
 	}
 	
 	/**
@@ -159,70 +183,79 @@ public class Collection {
 	@author Cristofer Gomez-Martinez
 	*/
 	public void printByReleaseDate() {
-		//sortedCollection will be a copy of the albums array to modify
+		System.out.println("*Album collection by the release dates");
+		if (albums[0] == null) {
+			System.out.println("The collection is empty!");
+			return;
+		}
 		Album[] sortedCollection = new Album[albums.length];
+		//sortedCollection will be a copy of the albums array that we will modify so to not change the original
 		for(int i = 0; i < albums.length; i++) {
 			sortedCollection[i] = albums[i];
 		}
-
-		int olderDate = 0;
-		//sorting array
-		for(int i = 0; i < numAlbums; i++) {
-			olderDate = i;
-			for(int j = i + 1; j < numAlbums; j++) {
-				if(sortedCollection[olderDate].getReleaseDate().compareTo(sortedCollection[j].getReleaseDate()) == 1) {
-					olderDate = j;
+		
+		int lastAvail = findEmptySpot(sortedCollection) - 1;
+		
+		for (int i = 0; i <= lastAvail; i++) {
+			for (int j = 0; j <= (lastAvail - i - 1); j++) {
+				//if j+1 is older than j, swap j and j+1
+				if (sortedCollection[j].getReleaseDate().compareTo(sortedCollection[j+1].getReleaseDate()) == 1) {
+					Album temp = sortedCollection[j];
+					sortedCollection[j] = sortedCollection[j+1];
+					sortedCollection[j+1] = temp;
 				}
 			}
-			if(olderDate != i) {
-				Album holder = new Album();
-				holder = sortedCollection[i];
-				sortedCollection[i] = sortedCollection[olderDate];
-				sortedCollection[olderDate] = holder;
-			}
 		}
-
-		String placeHolder = "";
-		for(int i = 0; i < numAlbums; i++) {
-			placeHolder = sortedCollection[i].toString();
-			System.out.println(placeHolder);
+		
+		for (int i = 0; i < numAlbums; i++) {
+			System.out.println(sortedCollection[i].toString());
 		}
+		
+		System.out.println("*End of list");
 	}
 	
 	/**
 	Displays the list of albums in the albums array by genre
-	@author Cristofer Gomez-Martinez
+	@author Emily Nelson
 	*/
 	public void printByGenre() {
-		//sortedCollection will be a copy of the albums array to modify
-		Album[] sortedCollection = new Album[albums.length];
-		for(int i = 0; i < albums.length; i++) {
-			sortedCollection[i] = albums[i];
+		System.out.println("*Album collection by genre");
+		if (albums[0] == null) {
+			System.out.println("The collection is empty!");
+			return;
 		}
-		
-		int firstGenre = 0; // keeps track of index of genre that comes first
-		
-		//sorting array
 		for(int i = 0; i < numAlbums; i++) {
-			firstGenre = i;
-			for(int j = i + 1; j < numAlbums; j++) {
-				if(sortedCollection[firstGenre].getGenre().compareTo(sortedCollection[j].getGenre()) > 0) {
-				firstGenre = j;
-				}
-			}
-			if(firstGenre != i) {
-				Album holder = new Album();
-				holder = sortedCollection[i];
-				sortedCollection[i] = sortedCollection[firstGenre];
-				sortedCollection[firstGenre] = holder;
+			Genre gen = albums[i].getGenre();
+			if (String.valueOf(gen).equals("classical")) {
+				System.out.println(albums[i].toString());
 			}
 		}
-				
-		String placeHolder = "";
 		for(int i = 0; i < numAlbums; i++) {
-			placeHolder = sortedCollection[i].toString();
-			System.out.println(placeHolder);
+			Genre gen = albums[i].getGenre();
+			if (String.valueOf(gen).equals("country")) {
+				System.out.println(albums[i].toString());
+			}
 		}
+		for(int i = 0; i < numAlbums; i++) {
+			Genre gen = albums[i].getGenre();
+			if (String.valueOf(gen).equals("jazz")) {
+				System.out.println(albums[i].toString());
+			}
+		}
+		for(int i = 0; i < numAlbums; i++) {
+			Genre gen = albums[i].getGenre();
+			if (String.valueOf(gen).equals("pop")) {
+				System.out.println(albums[i].toString());
+			}
+		}
+		for(int i = 0; i < numAlbums; i++) {
+			Genre gen = albums[i].getGenre();
+			if (String.valueOf(gen).equals("unknown")) {
+				System.out.println(albums[i].toString());
+			}
+		}
+		
+		System.out.println("*Album collection by genre");
 	}
 	
 	/**
@@ -239,6 +272,7 @@ public class Collection {
 		}
 		return -1;
 	}
+	
 		
 		
 }

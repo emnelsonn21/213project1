@@ -1,13 +1,16 @@
 import java.util.Calendar;
 import java.util.StringTokenizer;
 
-public class Date implements Comparable<Date> {
+
+/**
+This class defines a Date object, assigning it a month/day/year value
+It contains the methods that check if a user-inputted date is valid and that compares two Dates
+@author Emily Nelson, Cristofer Gomez-Martinez
+*/public class Date implements Comparable<Date> {
 	private int year;
 	private int month;
 	private int day;
 	
-	//this is a constructor. it doesn't return a value. it makes a Date object when 
-	//you give it a string that's valid
 	/**
 	Takes "mm/dd/yyyy" and creates a Date object out of it
 	Does nothing if the date is invalid
@@ -39,6 +42,15 @@ public class Date implements Comparable<Date> {
 	*/
 	public Date() {
 		Calendar today = Calendar.getInstance();
+	}
+	
+	/** 
+	returns a Date as a String
+	@author Emily Nelson
+	*/
+	public String printAsString(Date date) {
+		return month + "/" + day + "/" + year;
+		
 	}
 	
 	
@@ -112,13 +124,6 @@ public class Date implements Comparable<Date> {
 		return true;
 	}
 	
-	/**
-	Compares two dates with one another
-	Gives an int value back
-	@param date the date being compared to "this" date
-	@return 1 if date is older, -1 if "this" is older, 0 if both dates are equal
-	@author Emily Nelson
-	*/
 	@Override
 	public int compareTo(Date date) {
 		int yeardiff = this.year - date.year;
@@ -128,7 +133,7 @@ public class Date implements Comparable<Date> {
 		//return positive if "date" is older
 		//return negative if "this" is older
 		//example:    9/22/2021 compareTo ( 1/1/2021)
-		//"date" is older, yeardiff is pos, return 1 (positive)
+		//"date" is older,  return 1 
 		
 		if (yeardiff > 0) {
 			return 1;
@@ -236,6 +241,6 @@ public class Date implements Comparable<Date> {
 		} 
 		
 	}
-
+	
 	
 }

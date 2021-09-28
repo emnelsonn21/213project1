@@ -1,17 +1,21 @@
 import java.util.Scanner;
-import java.util.Calendar;
 import java.util.StringTokenizer;
 
+/**
+This class contains the method that organizes the user input
+@author Emily Nelson, Cristofer Gomez-Martinez
+*/
 public class CollectionManager {
 	
-  	/**
+  
+	/**
 	Reads the command lines from the console
 	@author Emily Nelson
 	*/
 	public void run() {
 		Collection collection = new Collection();
-		Album[] ugh = new Album[4]; //need to rename
-		collection.setAlbums(ugh);
+		Album[] newListOfAlbums = new Album[4]; //need to rename
+		collection.setAlbums(newListOfAlbums);
 	  
 		System.out.println("Collection Manager starts running");
 		Scanner sc = new Scanner(System.in);
@@ -19,43 +23,58 @@ public class CollectionManager {
 		
 		
 		while (sc.hasNextLine()) {
-			//read each line and see what to do - [A]dd, [D]elete, [L]end, [R]eturn, [P][PD][PG] display
 			
 			String input = sc.next();
 			
 			if (input.equals("Q")) {
 				break;
 			}
-			
 			input.replace(" ", "");
-			
 			StringTokenizer tokenizer = new StringTokenizer(input, ",");
 			
-			while (tokenizer.hasMoreElements()) {
+			if (tokenizer.hasMoreElements()) {
 				String command = tokenizer.nextToken();
+				if (!command.equals("A") && !command.equals("D") && !command.equals("L") && !command.equals("R")) {
+					command = command.replaceAll("\\r|\\n", "");
+				}
 				
 				Album newAlbum = new Album();
 				
 				if (tokenizer.hasMoreElements()) {
-					newAlbum.setTitle(tokenizer.nextToken());
-					newAlbum.setArtist(tokenizer.nextToken());
+					String newTitle = tokenizer.nextToken();
+					newAlbum.setTitle(newTitle);
 				}
 				
+				if (tokenizer.hasMoreElements()) {
+					String newArtist = tokenizer.nextToken();
+					newAlbum.setArtist(newArtist);
+				}
+				
+				
 				if(tokenizer.hasMoreElements()) {
-					Genre gen = Genre.valueOf(tokenizer.nextToken());
+					String stringGen = tokenizer.nextToken();
+					String stringGenCap = stringGen.substring(0,1).toUpperCase() + stringGen.substring(1);
+					if (!stringGenCap.equals("Pop") && !stringGenCap.equals("Jazz") && !stringGenCap.equals("Country") && !stringGenCap.equals("Classical") ) {
+						newAlbum.setGenre(Genre.valueOf("Unknown"));
+					} 
+					else {
+						Genre gen = Genre.valueOf(stringGenCap);
 					
-					switch(gen) {
-						case Classical:
-							newAlbum.setGenre(gen);
-						case Country:
-							newAlbum.setGenre(gen);
-						case Jazz:
-							newAlbum.setGenre(gen);
-						case Pop:
-							newAlbum.setGenre(gen);
-						default:
-							newAlbum.setGenre(Genre.valueOf("Unknown"));
+						switch(gen) {
+							default:
+								newAlbum.setGenre(Genre.valueOf("Unknown"));
+							case Classical:
+								newAlbum.setGenre(gen);
+							case Country:
+								newAlbum.setGenre(gen);
+							case Jazz:
+								newAlbum.setGenre(gen);
+							case Pop:
+								newAlbum.setGenre(gen);
+								
+						}
 					}
+					
 					
 					if (tokenizer.hasMoreElements()) {
 						String stringDate = tokenizer.nextToken();
@@ -63,42 +82,67 @@ public class CollectionManager {
 						Date date = new Date(stringDate);
 						newAlbum.setDate(date);
 						
+						
+						if (!newAlbum.getReleaseDate().isValid()) {
+							System.out.println("Invalid Date!");
+						}
 					}
 					
 					
 				}
 				
-				boolean wtf;
+				boolean didWork;
 		
-				if (command.equals("A")) {
-				 wtf = collection.add(newAlbum); 
-				 //if false then output invalid command maybe ?
+				if (command.equals("A") && newAlbum.getReleaseDate().isValid()) {
+					didWork = collection.add(newAlbum); 
+					if (didWork == true) {
+						System.out.println(newAlbum.toString() + " >> added"); 
+					}
+					else {
+						System.out.println(newAlbum.toString() + " >> already in collection"); 
+					}
 				}
 				
-				if (command.equals("D")) {
-					wtf = collection.remove(newAlbum);
+				else if (command.equals("D") && newAlbum.getReleaseDate().isValid()) {
+					didWork = collection.remove(newAlbum);
+					if (didWork == true) {
+						System.out.println(newAlbum.toString() + " >> deleted"); 
+					 }
+					 else {
+						 System.out.println(newAlbum.toString() + " >> not in collection"); 
+					 }
 				}
 				
-				if (command.equals("L")) {
-					wtf = collection.lendingOut(newAlbum);
+				else if (command.equals("L") && newAlbum.getReleaseDate().isValid()) {
+					didWork= collection.lendingOut(newAlbum);
+					if (didWork == true) {
+						System.out.println(newAlbum.toString() + " >> lended out"); 
+					 }
+					 else {
+						 System.out.println(newAlbum.toString() + " >> not available"); 
+					 }
 				}
 				
-				if (command.equals("R")) {
-					wtf = collection.returnAlbum(newAlbum);
+				else if (command.equals("R") && newAlbum.getReleaseDate().isValid()) {
+					didWork = collection.returnAlbum(newAlbum);
 				}
 				
-				if (command.equals("P")) {
+				else if (command.equals("P")) {
 					collection.print();
 				}
 				
-				if (command.equals("PD")) {
+				else if (command.equals("PD")) {
+					collection.printByReleaseDate();
 				}
 				
-				if (command.equals("PG")) {
+				else if (command.equals("PG")) {
+					collection.printByGenre();
 				}
 				
 				else {
-				  System.out.println("Invalid Command!");
+					if (newAlbum.getReleaseDate().isValid()) {
+						System.out.println("Invalid Command!");
+					}
 				}
 			}			
 		}

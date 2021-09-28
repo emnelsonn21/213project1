@@ -1,4 +1,7 @@
-
+/**
+ This class is the driver to run the project
+ @author Emily Nelson, Cristofer Gomez-Martinez
+ */
 public class RunProject1 {
 	
 	/**

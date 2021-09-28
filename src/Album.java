@@ -1,5 +1,7 @@
-
-
+/**
+ This class defines the type Album, with all of its attributes and methods
+ @author Emily Nelson, Cristofer Gomez-Martinez
+ */
 public class Album {
 	private String title;
 	  private String artist;

@@ -157,5 +157,85 @@ public class Date implements Comparable<Date> {
 		return 0;
 	}
 	
+	/**
+	Prints out the test results to the console
+	Shows if the test cases are passed or not passed
+	@author Cristofer Gomez-Martinez
+	*/
+	public static void main() {
+		String testOne = "10/12/1970";//Test Case #1
+		Date date = new Date(testOne);
+		boolean checkIfValid = date.isValid();
+		if(checkIfValid == true) {
+			System.out.println("true");
+		}else {
+			System.out.println("false");
+		}
+		
+		String testTwo = "2/29/2021";//Test Case #2
+		date = new Date(testTwo);
+		checkIfValid = date.isValid();
+		if(checkIfValid == true) {
+			System.out.println("true");
+		}else {
+			System.out.println("false");
+		} 
+		
+		String testThree = "13/30/2018";//Test Case #3
+		date = new Date(testThree);
+		checkIfValid = date.isValid();
+		if(checkIfValid == true) {
+			System.out.println("true");
+		}else {
+			System.out.println("false");
+		} 
+		
+		String testFour = "12/25/2021";//Test Case #4
+		date = new Date(testFour);
+		checkIfValid = date.isValid();
+		if(checkIfValid == true) {
+			System.out.println("true");
+		}else {
+			System.out.println("false");
+		} 
+		
+		String testFive = "2/29/2016";//Test Case #5
+		date = new Date(testFive);
+		checkIfValid = date.isValid();
+		if(checkIfValid == true) {
+			System.out.println("true");
+		}else {
+			System.out.println("false");
+		} 
+		
+		String testSix = "3/7/2000";//Test Case #6
+		date = new Date(testSix);
+		checkIfValid = date.isValid();
+		if(checkIfValid == true) {
+			System.out.println("true");
+		}else {
+			System.out.println("false");
+		} 
+		
+		String testSeven = "4/31/2021";//Test Case #7
+		date = new Date(testSeven);
+		checkIfValid = date.isValid();
+		if(checkIfValid == true) {
+			System.out.println("true");
+		}else {
+			System.out.println("false");
+		} 
+		
+		String testEight = "1/32/2021";//Test Case #8
+		date = new Date(testEight);
+		checkIfValid = date.isValid();
+		if(checkIfValid == true) {
+			System.out.println("true");
+		}else {
+			System.out.println("false");
+		} 
+		
+	}
+
 	
 }
